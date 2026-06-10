@@ -1,4 +1,4 @@
-package com.example.planttracker.planttracker.config;
+package com.example.planttracker.config;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
