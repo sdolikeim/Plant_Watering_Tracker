@@ -1,0 +1,34 @@
+﻿services:
+  db:
+    image: postgres:16
+    container_name: plant-tracker-db
+    environment:
+      POSTGRES_DB: plantdb
+      POSTGRES_USER: plantuser
+      POSTGRES_PASSWORD: plantpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - plant-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plantuser -d plantdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: plant-tracker-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/plantdb
+      SPRING_DATASOURCE_USERNAME: plantuser
+      SPRING_DATASOURCE_PASSWORD: plantpass
+      SERVER_PORT: 8088
+    ports:
+      - "8088:8088"
+
+volumes:
+  plant-db-data:
