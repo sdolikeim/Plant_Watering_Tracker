@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plant-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plant-backend
+  template:
+    metadata:
+      labels:
+        app: plant-backend
+    spec:
+      containers:
+        - name: backend
+          image: plant-tracker-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8088
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://plant-postgres-service:5432/plantdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: plantuser
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: plantpass
+            - name: SERVER_PORT
+              value: "8088"

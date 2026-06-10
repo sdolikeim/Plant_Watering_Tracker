@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plant-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plant-postgres
+  template:
+    metadata:
+      labels:
+        app: plant-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: plantdb
+            - name: POSTGRES_USER
+              value: plantuser
+            - name: POSTGRES_PASSWORD
+              value: plantpass

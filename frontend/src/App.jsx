@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API_BASE_URL = "http://localhost:8088/api";
+const API_BASE_URL = "http://localhost:30088/api";
 
 function App() {
   const [plants, setPlants] = useState([]);

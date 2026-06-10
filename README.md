@@ -237,3 +237,16 @@ SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/plantdb
 PostgreSQL을 데이터베이스로 사용했으며, Docker Compose를 통해 백엔드와 데이터베이스를 함께 실행하도록 구성했습니다.
 
 프론트엔드에서는 React와 Axios를 사용해 식물 등록, 목록 조회, 물주기 처리, 삭제 기능을 구현했습니다.
+
+
+## Kubernetes 실습
+
+Docker Compose로 실행하던 Spring Boot 백엔드와 PostgreSQL 환경을 Kubernetes Deployment와 Service로 구성했습니다.
+
+React 프론트엔드는 로컬 개발 서버에서 실행하고, API 요청은 Kubernetes NodePort Service를 통해 Spring Boot 백엔드 Pod로 전달되도록 구성했습니다. 백엔드는 ClusterIP Service를 통해 PostgreSQL Pod에 접근하며, 식물 등록과 목록 조회가 정상 동작하는 것을 확인했습니다.
+
+- Spring Boot 백엔드 Deployment 구성
+- PostgreSQL Deployment 구성
+- PostgreSQL 내부 접근을 위한 ClusterIP Service 구성
+- 백엔드 외부 접근을 위한 NodePort Service 구성
+- React 화면에서 Kubernetes 백엔드 API로 식물 등록/조회 확인
